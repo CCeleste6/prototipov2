@@ -1,5 +1,3 @@
-import { initIfEmpty, saveState } from './store.js';
-
 const RANKS = [
   { name: 'Aprendiz', min: 0, max: 2000 },
   { name: 'Estudante', min: 2001, max: 5000 },
@@ -42,4 +40,19 @@ renderPerfil();
 
 document.querySelectorAll('.quiz').forEach(section => {
   const correct = section.dataset.correct;
-  const feedback = section
+  const feedback = section.querySelector('.quizFeedback');
+  section.querySelectorAll('.quizBtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.dataset.answer;
+      if (answer === correct) {
+        a.pm += 500;
+        a.pc += 200;
+        feedback.textContent = "✅ Resposta correta! Você ganhou 500 PM e 200 PC.";
+      } else {
+        feedback.textContent = "❌ Resposta incorreta. Tente novamente.";
+      }
+      saveState(state);
+      renderPerfil();
+    });
+  });
+});
