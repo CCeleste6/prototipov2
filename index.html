@@ -1,19 +1,173 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Legado Escolar — Início</title>
-  <link rel="stylesheet" href="css/styles.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Legado Escolar</title>
+  <meta name="description" content="Legado Escolar — Onde cada conquista deixa a sua marca." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="container">
-    <h1>Legado Escolar</h1>
-    <p>Onde cada conquista deixa a sua marca</p>
-    <div class="actions">
-      <button onclick="window.location.href='register.html'">Registrar novo aluno</button>
-      <button onclick="window.location.href='aluno.html'">Entrar como aluno</button>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Legado Escolar</h1>
+      <nav aria-label="Principal">
+        <ul class="nav">
+          <li><a href="#inicio" class="nav-link">Início</a></li>
+          <li><a href="#registrar" class="nav-link">Registrar aluno</a></li>
+          <li><a href="#entrar" class="nav-link">Entrar</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
+
+  <main id="inicio" class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <h2 id="hero-title">Onde cada conquista deixa a sua marca</h2>
+      <p class="subtitle">Registre alunos, acompanhe conquistas e celebre o progresso ao longo do ano.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#registrar">Registrar novo aluno</a>
+        <a class="btn" href="#entrar">Entrar como aluno</a>
+      </div>
+    </section>
+
+    <section id="registrar" class="card" aria-labelledby="registrar-title">
+      <h3 id="registrar-title">Registrar novo aluno</h3>
+      <form id="registerForm" novalidate>
+        <div class="grid-2">
+          <div class="field">
+            <label for="regName">Nome completo</label>
+            <input id="regName" name="name" type="text" required minlength="3" autocomplete="name" />
+            <small class="error" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="regEmail">E-mail</label>
+            <input id="regEmail" name="email" type="email" required autocomplete="email" />
+            <small class="error" aria-live="polite"></small>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="regId">ID do aluno</label>
+            <input id="regId" name="studentId" type="text" required minlength="3" pattern="[A-Za-z0-9_-]{3,}" />
+            <small class="hint">Use letras, números, hífen ou sublinhado. Ex.: A123-PE</small>
+            <small class="error" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="regPass">Senha</label>
+            <input id="regPass" name="password" type="password" required minlength="6" />
+            <small class="hint">Mínimo de 6 caracteres.</small>
+            <small class="error" aria-live="polite"></small>
+          </div>
+        </div>
+        <div class="field">
+          <label for="regClass">Turma/ano</label>
+          <input id="regClass" name="classroom" type="text" required minlength="1" />
+          <small class="error" aria-live="polite"></small>
+        </div>
+        <button type="submit" class="btn primary">Cadastrar</button>
+        <div id="registerStatus" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section id="entrar" class="card" aria-labelledby="login-title">
+      <h3 id="login-title">Entrar como aluno</h3>
+      <form id="loginForm" novalidate>
+        <div class="grid-2">
+          <div class="field">
+            <label for="loginId">ID do aluno</label>
+            <input id="loginId" name="studentId" type="text" required />
+            <small class="error" aria-live="polite"></small>
+          </div>
+          <div class="field">
+            <label for="loginPass">Senha</label>
+            <input id="loginPass" name="password" type="password" required />
+            <small class="error" aria-live="polite"></small>
+          </div>
+        </div>
+        <button type="submit" class="btn primary">Entrar</button>
+        <div id="loginStatus" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section id="dashboard" class="card hidden" aria-labelledby="dash-title">
+      <h3 id="dash-title">Painel do aluno</h3>
+      <div class="dash-header">
+        <div>
+          <p><strong>Aluno:</strong> <span id="dashName">—</span></p>
+          <p><strong>ID:</strong> <span id="dashId">—</span></p>
+          <p><strong>Turma:</strong> <span id="dashClass">—</span></p>
+        </div>
+        <div class="dash-actions">
+          <button id="logoutBtn" class="btn">Sair</button>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <h4>Registrar conquista</h4>
+          <form id="achievementForm" novalidate>
+            <div class="field">
+              <label for="achTitle">Título</label>
+              <input id="achTitle" name="title" type="text" required minlength="3" />
+              <small class="error" aria-live="polite"></small>
+            </div>
+            <div class="field">
+              <label for="achDesc">Descrição</label>
+              <textarea id="achDesc" name="description" rows="3" required minlength="5"></textarea>
+              <small class="error" aria-live="polite"></small>
+            </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="achDate">Data</label>
+                <input id="achDate" name="date" type="date" required />
+                <small class="error" aria-live="polite"></small>
+              </div>
+              <div class="field">
+                <label for="achTag">Categoria</label>
+                <select id="achTag" name="tag" required>
+                  <option value="">Selecione</option>
+                  <option>Acadêmico</option>
+                  <option>Esportivo</option>
+                  <option>Artístico</option>
+                  <option>Comunitário</option>
+                </select>
+                <small class="error" aria-live="polite"></small>
+              </div>
+            </div>
+            <button type="submit" class="btn primary">Adicionar</button>
+            <div id="achStatus" class="status" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <div>
+          <h4>Minhas conquistas</h4>
+          <div class="filters">
+            <label class="sr-only" for="filterTag">Filtrar por categoria</label>
+            <select id="filterTag">
+              <option value="">Todas</option>
+              <option>Acadêmico</option>
+              <option>Esportivo</option>
+              <option>Artístico</option>
+              <option>Comunitário</option>
+            </select>
+          </div>
+          <ul id="achList" class="ach-list" aria-live="polite"></ul>
+          <p id="emptyList" class="muted">Nenhuma conquista registrada ainda.</p>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="muted">© <span id="year"></span> Legado Escolar. Protótipo para demonstração.</p>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
 </body>
 </html>
