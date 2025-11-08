@@ -38,25 +38,8 @@ function renderPerfil() {
   document.getElementById('pmProgress').style.width = pmProgressPercent(a.pm) + '%';
 }
 
-// Inicializa perfil
 renderPerfil();
 
-// Lógica para todos os quizzes
 document.querySelectorAll('.quiz').forEach(section => {
   const correct = section.dataset.correct;
-  const feedback = section.querySelector('.quizFeedback');
-  section.querySelectorAll('.quizBtn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const answer = btn.dataset.answer;
-      if (answer === correct) {
-        a.pm += 500; // ganha 500 PM
-        a.pc += 200; // ganha 200 PC
-        feedback.textContent = "✅ Resposta correta! Você ganhou 500 PM e 200 PC.";
-      } else {
-        feedback.textContent = "❌ Resposta incorreta. Tente novamente.";
-      }
-      saveState(state);
-      renderPerfil();
-    });
-  });
-});
+  const feedback = section
