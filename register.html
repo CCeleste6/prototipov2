@@ -1,29 +1,43 @@
-<form id="formReg" class="card">
-  <label>Nome: <input type="text" id="nome" required /></label>
-  <label>Escola: <input type="text" id="escola" required /></label>
-  <label>Casa:
-    <select id="casa" required>
-      <option value="guardia">Casa Guardiã</option>
-      <option value="visionaria">Casa Visionária</option>
-      <option value="solidaria">Casa Solidária</option>
-      <option value="precursora">Casa Precursora</option>
-    </select>
-  </label>
-  <button type="submit">Registrar</button>
-</form>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Registro — Legado Escolar</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <main class="container">
+    <h2>Registro de Aluno</h2>
+    <form id="formReg" class="card">
+      <label>Nome: <input type="text" id="nome" required /></label>
+      <label>Escola: <input type="text" id="escola" required /></label>
+      <label>Casa:
+        <select id="casa" required>
+          <option value="guardia">Casa Guardiã</option>
+          <option value="visionaria">Casa Visionária</option>
+          <option value="solidaria">Casa Solidária</option>
+          <option value="precursora">Casa Precursora</option>
+        </select>
+      </label>
+      <button type="submit">Registrar</button>
+    </form>
+  </main>
 
-<script>
-  document.getElementById('formReg').onsubmit = (e) => {
-    e.preventDefault();
-    const aluno = {
-      nome: document.getElementById('nome').value,
-      escola: document.getElementById('escola').value,
-      casa: document.getElementById('casa').value,
-      pm: 0,
-      pc: 0,
-      badges: []
+  <script>
+    document.getElementById('formReg').onsubmit = (e) => {
+      e.preventDefault();
+      const aluno = {
+        nome: document.getElementById('nome').value,
+        escola: document.getElementById('escola').value,
+        casa: document.getElementById('casa').value,
+        pm: 0,
+        pc: 0,
+        badges: []
+      };
+      localStorage.setItem('LE_state', JSON.stringify({ aluno }));
+      window.location.href = 'aluno.html';
     };
-    localStorage.setItem('LE_state', JSON.stringify({ aluno }));
-    window.location.href = 'aluno.html';
-  };
-</script>
+  </script>
+</body>
+</html>
