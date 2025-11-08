@@ -1,15 +1,13 @@
-const KEY = 'LE_state';
-
-export const loadState = () => {
-  const s = localStorage.getItem(KEY);
+function loadState() {
+  const s = localStorage.getItem('LE_state');
   return s ? JSON.parse(s) : null;
-};
+}
 
-export const saveState = (state) => {
-  localStorage.setItem(KEY, JSON.stringify(state));
-};
+function saveState(state) {
+  localStorage.setItem('LE_state', JSON.stringify(state));
+}
 
-export const initIfEmpty = () => {
+function initIfEmpty() {
   let s = loadState();
   if (!s) {
     s = {
@@ -25,4 +23,4 @@ export const initIfEmpty = () => {
     saveState(s);
   }
   return s;
-};
+}
