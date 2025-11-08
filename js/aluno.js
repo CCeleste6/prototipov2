@@ -1,3 +1,4 @@
+// Definição dos ranques
 const RANKS = [
   { name: 'Aprendiz', min: 0, max: 2000 },
   { name: 'Estudante', min: 2001, max: 5000 },
@@ -11,6 +12,7 @@ const RANKS = [
   { name: 'Oráculo', min: 80001, max: Infinity }
 ];
 
+// Funções auxiliares
 function rankFromPM(pm) {
   return RANKS.find(r => pm >= r.min && pm <= r.max)?.name || 'Oráculo';
 }
@@ -21,8 +23,10 @@ function pmProgressPercent(pm) {
   return Math.max(0, Math.min(100, Math.round(span * 100)));
 }
 
+// Carrega estado salvo
 let state = loadState();
 if (!state || !state.aluno) {
+  console.warn("Nenhum aluno encontrado no localStorage, criando demo...");
   state = {
     aluno: {
       nome: "Aluno Demo",
@@ -36,7 +40,9 @@ if (!state || !state.aluno) {
   saveState(state);
 }
 const a = state.aluno;
+console.log("Aluno carregado:", a);
 
+// Renderiza HUD
 function renderPerfil() {
   if (!a || !a.nome) {
     document.getElementById('perfil').innerHTML = "Nenhum aluno registrado.";
@@ -52,10 +58,20 @@ function renderPerfil() {
   document.getElementById('pc').textContent = a.pc;
   document.getElementById('rank').textContent = rankFromPM(a.pm);
   document.getElementById('pmProgress').style.width = pmProgressPercent(a.pm) + '%';
+
+  console.log("HUD atualizado:", {
+    nome: a.nome,
+    escola: a.escola,
+    casa: a.casa,
+    pm: a.pm,
+    pc: a.pc,
+    rank: rankFromPM(a.pm)
+  });
 }
 
 renderPerfil();
 
+// Lógica dos quizzes
 document.querySelectorAll('.quiz').forEach(section => {
   const correct = section.dataset.correct;
   const feedback = section.querySelector('.quizFeedback');
@@ -70,6 +86,7 @@ document.querySelectorAll('.quiz').forEach(section => {
         feedback.textContent = "❌ Resposta incorreta. Tente novamente.";
       }
       saveState(state);
+      console.log("Novo estado salvo:", state);
       renderPerfil();
     });
   });
