@@ -1,4 +1,3 @@
-// --- Quiz ---
 function setupQuiz() {
   const form = byId('quizForm');
   const status = byId('quizStatus');
@@ -31,7 +30,7 @@ function setupQuiz() {
       date: new Date().toLocaleString()
     };
 
-    // salvar no aluno
+
     student.quizHistory = student.quizHistory || [];
     student.quizHistory.push(result);
 
@@ -45,7 +44,7 @@ function setupQuiz() {
     renderQuizHistory(student);
   });
 
-  // renderizar histórico ao carregar
+
   const session = getSession();
   if (session) {
     const student = findStudentById(session.studentId);
