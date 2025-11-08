@@ -159,6 +159,25 @@
           <p id="emptyList" class="muted">Nenhuma conquista registrada ainda.</p>
         </div>
       </div>
+      <section id="questoes" class="card hidden" aria-labelledby="questoes-title">
+  <h3 id="questoes-title">Questões</h3>
+  <div id="quizArea">
+    <form id="quizForm">
+      <p id="quizQuestion"><strong>Pergunta:</strong> Qual é a capital de Pernambuco?</p>
+      <div class="field">
+        <label><input type="radio" name="answer" value="Recife" required /> Recife</label>
+        <label><input type="radio" name="answer" value="Olinda" /> Olinda</label>
+        <label><input type="radio" name="answer" value="Paulista" /> Paulista</label>
+      </div>
+      <button type="submit" class="btn primary">Responder</button>
+      <div id="quizStatus" class="status" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+
+  <h4>Histórico de respostas</h4>
+  <ul id="quizHistory" class="ach-list"></ul>
+</section>
+
     </section>
   </main>
 
