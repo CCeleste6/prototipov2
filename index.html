@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Legado Escolar — Login</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Legado Escolar</h1>
+    <p>Onde cada conquista deixa a sua marca</p>
+
+    <section class="card">
+      <h2>Entrar</h2>
+      <label>
+        <span>Login</span>
+        <input id="login" type="text" placeholder="Ex.: richard.victor" />
+      </label>
+      <label>
+        <span>Senha</span>
+        <input id="senha" type="password" placeholder="••••••••" />
+      </label>
+
+      <div class="actions">
+        <button id="btnAluno">Entrar como aluno</button>
+        <button id="btnProfessor" class="secondary">Entrar como professor</button>
+      </div>
+
+      <a href="#" class="link">Clique aqui para solicitar seu cadastro</a>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('btnAluno').onclick = () => {
+      const login = document.getElementById('login').value.trim();
+      if (!login) return alert('Informe um login');
+      localStorage.setItem('LE_user', JSON.stringify({role: 'aluno', login}));
+      window.location.href = 'aluno.html';
+    };
+    document.getElementById('btnProfessor').onclick = () => {
+      alert('Protótipo do professor na próxima etapa 😉');
+    };
+  </script>
+</body>
+</html>
