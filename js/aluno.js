@@ -38,15 +38,21 @@ function renderPerfil() {
   document.getElementById('pmProgress').style.width = pmProgressPercent(a.pm) + '%';
 }
 
-// Exemplo: botão para ganhar pontos
-const btn = document.createElement('button');
-btn.textContent = "Completar atividade (+500 PM)";
-btn.onclick = () => {
-  a.pm += 500;
-  saveState(state);
-  renderPerfil();
-};
-document.body.appendChild(btn);
-
-// Render inicial
+// Inicializa perfil
 renderPerfil();
+
+// Lógica do quiz
+document.querySelectorAll('.quizBtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const answer = btn.dataset.answer;
+    const feedback = document.getElementById('quizFeedback');
+    if (answer === "4") {
+      a.pm += 500; // ganha 500 PM por acerto
+      feedback.textContent = "✅ Resposta correta! Você ganhou 500 PM.";
+    } else {
+      feedback.textContent = "❌ Resposta incorreta. Tente novamente.";
+    }
+    saveState(state);
+    renderPerfil();
+  });
+});
