@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Legado Escolar — Aluno</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <main class="container">
+    <h2>Perfil do Aluno</h2>
+    <div id="perfil" class="card"></div>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Pontos de Mérito (PM)</h3>
+        <div class="stat"><span>PM atual</span><strong id="pm">0</strong></div>
+        <div class="stat"><span>Ranque</span><strong id="rank">—</strong></div>
+        <div class="progress"><div id="pmProgress"></div></div>
+      </div>
+
+      <div class="card">
+        <h3>Pontos de Casa (PC)</h3>
+        <div class="stat"><span>PC atual</span><strong id="pc">0</strong></div>
+        <div class="badges" id="badges"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Atividade — Bhaskara</h3>
+      <p>Escolha seu formato para ganhar PM.</p>
+      <div id="formats" class="badges"></div>
+      <div class="actions">
+        <button id="submitActivity">Enviar atividade</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Quiz 1</h3>
+      <p id="quizQ"></p>
+      <div id="quizOps"></div>
+      <div class="actions">
+        <button id="submitQuiz">Responder</button>
+      </div>
+      <p id="quizResult"></p>
+    </section>
+
+    <section class="card">
+      <h3>Destaques da Semana</h3>
+      <ul>
+        <li>Larissa Mirela ganhou 90 PC essa semana!</li>
+        <li>Richard Victor adquiriu Escalador Veloz essa semana!</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h3>Ranking das Casas (simulado)</h3>
+      <table class="table" id="casasTbl">
+        <thead><tr><th>Casa</th><th>PC</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script type="module" src="js/aluno.js"></script>
+</body>
+</html>
