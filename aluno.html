@@ -10,7 +10,6 @@
   <main class="container">
     <h2>Perfil do Aluno</h2>
     <div id="perfil" class="card"></div>
-    
 
     <section class="grid">
       <div class="card">
@@ -28,49 +27,6 @@
     </section>
   </main>
 
-  <script type="module">
-    const RANKS = [
-      { name: 'Aprendiz', min: 0, max: 2000 },
-      { name: 'Estudante', min: 2001, max: 5000 },
-      { name: 'Pesquisador', min: 5001, max: 9000 },
-      { name: 'Acadêmico', min: 9001, max: 14000 },
-      { name: 'Mentor', min: 14001, max: 20000 },
-      { name: 'Erudito', min: 20001, max: 28000 },
-      { name: 'Filósofo', min: 28001, max: 40000 },
-      { name: 'Sábio', min: 40001, max: 55000 },
-      { name: 'Luminar', min: 55001, max: 80000 },
-      { name: 'Oráculo', min: 80001, max: Infinity }
-    ];
-
-    function rankFromPM(pm) {
-      return RANKS.find(r => pm >= r.min && pm <= r.max)?.name || 'Oráculo';
-    }
-
-    function pmProgressPercent(pm) {
-      const r = RANKS.find(rr => pm >= rr.min && pm <= rr.max) || RANKS[RANKS.length-1];
-      const span = (pm - r.min) / (r.max - r.min);
-      return Math.max(0, Math.min(100, Math.round(span * 100)));
-    }
-
-    const state = JSON.parse(localStorage.getItem('LE_state'));
-    if (state && state.aluno) {
-      const a = state.aluno;
-      document.getElementById('perfil').innerHTML = `
-        <strong>${a.nome}</strong> — ${a.escola}<br/>
-        Casa escolhida: <em>${a.casa}</em><br/>
-        PM: ${a.pm} • PC: ${a.pc}
-      `;
-      document.getElementById('pm').textContent = a.pm;
-      document.getElementById('pc').textContent = a.pc;
-      document.getElementById('rank').textContent = rankFromPM(a.pm);
-      document.getElementById('pmProgress').style.width = pmProgressPercent(a.pm) + '%';
-    } else {
-      document.getElementById('perfil').innerHTML = "Nenhum aluno registrado.";
-    }
-    <script type="module" src="js/aluno.js"></script>
-</body>
-</html>
-
-  </script>
+  <script type="module" src="js/aluno.js"></script>
 </body>
 </html>
