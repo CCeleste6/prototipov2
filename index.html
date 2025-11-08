@@ -3,45 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Legado Escolar — Aluno</title>
+  <title>Legado Escolar — Início</title>
   <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
   <main class="container">
-    <h2>Perfil do Aluno</h2>
-    <div id="perfil" class="card"></div>
+    <h1>Legado Escolar</h1>
+    <p>Onde cada conquista deixa a sua marca</p>
 
-    <section class="grid">
-      <div class="card">
-        <h3>Pontos de Mérito (PM)</h3>
-        <div class="stat"><span>PM atual</span><strong id="pm">0</strong></div>
-        <div class="stat"><span>Ranque</span><strong id="rank">—</strong></div>
-        <div class="progress"><div id="pmProgress"></div></div>
-      </div>
-
-      <div class="card">
-        <h3>Pontos de Casa (PC)</h3>
-        <div class="stat"><span>PC atual</span><strong id="pc">0</strong></div>
-        <div class="badges" id="badges"></div>
-      </div>
-    </section>
+    <div class="actions">
+      <button onclick="window.location.href='register.html'">Registrar novo aluno</button>
+      <button onclick="window.location.href='aluno.html'">Entrar como aluno</button>
+    </div>
   </main>
-
-  <script type="module">
-    const state = JSON.parse(localStorage.getItem('LE_state'));
-    if (state && state.aluno) {
-      const a = state.aluno;
-      document.getElementById('perfil').innerHTML = `
-        <strong>${a.nome}</strong> — ${a.escola}<br/>
-        Casa escolhida: <em>${a.casa}</em><br/>
-        PM: ${a.pm} • PC: ${a.pc}
-      `;
-      document.getElementById('pm').textContent = a.pm;
-      document.getElementById('pc').textContent = a.pc;
-      document.getElementById('rank').textContent = "—"; 
-    } else {
-      document.getElementById('perfil').innerHTML = "Nenhum aluno registrado.";
-    }
-  </script>
 </body>
 </html>
