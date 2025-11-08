@@ -14,6 +14,7 @@ const RANKS = [
 function rankFromPM(pm) {
   return RANKS.find(r => pm >= r.min && pm <= r.max)?.name || 'Oráculo';
 }
+
 function pmProgressPercent(pm) {
   const r = RANKS.find(rr => pm >= rr.min && pm <= rr.max) || RANKS[RANKS.length-1];
   const span = (pm - r.min) / (r.max - r.min);
