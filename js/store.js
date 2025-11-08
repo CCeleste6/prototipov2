@@ -1,4 +1,3 @@
-// API simples sobre localStorage
 const KEY = 'LE_state';
 
 export const loadState = () => {
@@ -14,19 +13,14 @@ export const initIfEmpty = () => {
   let s = loadState();
   if (!s) {
     s = {
-      user: JSON.parse(localStorage.getItem('LE_user')) || { role: 'aluno', login: 'aluno.demo' },
       aluno: {
-        nome: 'Richard Victor',
-        escola: 'Colégio XYZ',
-        etapa: '1º Médio',
+        nome: 'Aluno Demo',
+        escola: 'Escola Teste',
         casa: 'precursora',
-        pm: 36556,
-        pc: 6533,
-        badges: ['Fast Climber', 'Sábio', 'Championship'],
-        quizzes: {}, // quizId -> {correct: true, earnedPM: 7}
-        atividades: {} // activityId -> {format: 'video', earnedPM: 6}
-      },
-      casas: { precursora: 23566, guardia: 17800, visionaria: 8000, solidaria: 0 }
+        pm: 0,
+        pc: 0,
+        badges: []
+      }
     };
     saveState(s);
   }
