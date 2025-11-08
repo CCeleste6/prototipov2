@@ -1,4 +1,3 @@
-// Ranques
 const RANKS = [
   { name: 'Aprendiz', min: 0, max: 2000 },
   { name: 'Estudante', min: 2001, max: 5000 },
@@ -38,7 +37,6 @@ function renderPerfil() {
 
 renderPerfil();
 
-
 document.querySelectorAll('.quiz').forEach(section => {
   const correct = section.dataset.correct;
   const feedback = section.querySelector('.quizFeedback');
@@ -50,4 +48,10 @@ document.querySelectorAll('.quiz').forEach(section => {
         a.pc += 200;
         feedback.textContent = "✅ Resposta correta! Você ganhou 500 PM e 200 PC.";
       } else {
-        feedback.textContent = "❌ Resposta incorreta. Tente
+        feedback.textContent = "❌ Resposta incorreta. Tente novamente.";
+      }
+      saveState(state);
+      renderPerfil();
+    });
+  });
+});
