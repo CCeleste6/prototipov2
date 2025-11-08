@@ -16,15 +16,33 @@ function rankFromPM(pm) {
 }
 
 function pmProgressPercent(pm) {
-  const r = RANKS.find(rr => pm >= rr.min && pm <= rr.max) || RANKS[RANKS.length-1];
+  const r = RANKS.find(rr => pm >= rr.min && pm <= rr.max) || RANKS[RANKS.length - 1];
   const span = (pm - r.min) / (r.max - r.min);
   return Math.max(0, Math.min(100, Math.round(span * 100)));
 }
 
-const state = initIfEmpty();
+let state = loadState();
+if (!state || !state.aluno) {
+  state = {
+    aluno: {
+      nome: "Aluno Demo",
+      escola: "Escola Teste",
+      casa: "precursora",
+      pm: 0,
+      pc: 0,
+      badges: []
+    }
+  };
+  saveState(state);
+}
 const a = state.aluno;
 
 function renderPerfil() {
+  if (!a || !a.nome) {
+    document.getElementById('perfil').innerHTML = "Nenhum aluno registrado.";
+    return;
+  }
+
   document.getElementById('perfil').innerHTML = `
     <strong>${a.nome}</strong> — ${a.escola}<br/>
     Casa escolhida: <em>${a.casa}</em><br/>
