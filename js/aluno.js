@@ -14,8 +14,9 @@ const RANKS = [
 function rankFromPM(pm) {
   return RANKS.find(r => pm >= r.min && pm <= r.max)?.name || 'Oráculo';
 }
+
 function pmProgressPercent(pm) {
-  const r = RANKS.find(rr => pm >= rr.min && pm <= rr.max) || RANKS[RANKS.length-1];
+  const r = RANKS.find(rr => pm >= rr.min && pm <= rr.max) || RANKS[RANKS.length - 1];
   const span = (pm - r.min) / (r.max - r.min);
   return Math.max(0, Math.min(100, Math.round(span * 100)));
 }
@@ -36,3 +37,22 @@ function renderPerfil() {
 }
 
 renderPerfil();
+
+document.querySelectorAll('.quiz').forEach(section => {
+  const correct = section.dataset.correct;
+  const feedback = section.querySelector('.quizFeedback');
+  section.querySelectorAll('.quizBtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.dataset.answer;
+      if (answer === correct) {
+        a.pm += 500; 
+        a.pc += 200; 
+        feedback.textContent = "✅ Resposta correta! Você ganhou 500 PM e 200 PC.";
+      } else {
+        feedback.textContent = "❌ Resposta incorreta. Tente novamente.";
+      }
+      saveState(state);
+      renderPerfil();
+    });
+  });
+});
