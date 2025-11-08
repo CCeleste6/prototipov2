@@ -22,3 +22,38 @@
       <label>Casa:
         <select id="casa" name="casa" required>
           <option value="guardia">Casa Guardiã</option>
+          <option value="visionaria">Casa Visionária</option>
+          <option value="solidaria">Casa Solidária</option>
+          <option value="precursora">Casa Precursora</option>
+        </select>
+      </label>
+
+      <button type="submit">Registrar</button>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('formReg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const aluno = {
+        nome: document.getElementById('nome').value.trim(),
+        escola: document.getElementById('escola').value.trim(),
+        casa: document.getElementById('casa').value,
+        pm: 0,
+        pc: 0,
+        badges: []
+      };
+
+      localStorage.setItem('LE_state', JSON.stringify({ aluno }));
+
+      console.log("Aluno salvo:", aluno);
+      console.log("LocalStorage agora contém:", localStorage.getItem('LE_state'));
+
+      window.location.href = 'aluno.html';
+    });
+  </script>
+</body>
+</html>
