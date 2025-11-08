@@ -9,38 +9,74 @@
 <body>
   <main class="container">
     <h2>Registro de Aluno</h2>
-    <form id="formReg" class="card">
-      <label>Nome: <input type="text" id="nome" required /></label>
-      <label>Escola: <input type="text" id="escola" required /></label>
+
+    <form id="formReg" class="card" autocomplete="off">
+      <label>Nome:
+        <input type="text" id="nome" name="nome" required />
+      </label>
+
+      <label>Escola:
+        <input type="text" id="escola" name="escola" required />
+      </label>
+
       <label>Casa:
-        <select id="casa" required>
+        <select id="casa" name="casa" required>
           <option value="guardia">Casa Guardiã</option>
           <option value="visionaria">Casa Visionária</option>
           <option value="solidaria">Casa Solidária</option>
           <option value="precursora">Casa Precursora</option>
         </select>
       </label>
+
       <button type="submit">Registrar</button>
     </form>
+
+    <p id="regFeedback" class="card" style="display:none;"></p>
   </main>
 
-  <!-- Script no final do body -->
+ 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById('formReg');
-      form.onsubmit = (e) => {
+      const feedback = document.getElementById('regFeedback');
+
+      if (!form) {
+        console.error('Formulário #formReg não encontrado.');
+        return;
+      }
+
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        const nome = document.getElementById('nome')?.value?.trim();
+        const escola = document.getElementById('escola')?.value?.trim();
+        const casa = document.getElementById('casa')?.value;
+
+        if (!nome || !escola || !casa) {
+          feedback.textContent = 'Preencha todos os campos.';
+          feedback.style.display = 'block';
+          return;
+        }
+
         const aluno = {
-          nome: document.getElementById('nome').value,
-          escola: document.getElementById('escola').value,
-          casa: document.getElementById('casa').value,
+          nome,
+          escola,
+          casa,
           pm: 0,
           pc: 0,
           badges: []
         };
-        localStorage.setItem('LE_state', JSON.stringify({ aluno }));
+
+        try {
+          localStorage.setItem('LE_state', JSON.stringify({ aluno }));
+        } catch (err) {
+          feedback.textContent = 'Falha ao salvar os dados. Verifique permissões do navegador.';
+          feedback.style.display = 'block';
+          return;
+        }
+
         window.location.href = 'aluno.html';
-      };
+      });
     });
   </script>
 </body>
