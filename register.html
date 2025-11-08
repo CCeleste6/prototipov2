@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Registro — Legado Escolar</title>
   <link rel="stylesheet" href="css/styles.css"/>
@@ -9,72 +9,35 @@
 <body>
   <main class="container">
     <h2>Registro de Aluno</h2>
-
     <form id="formReg" class="card" autocomplete="off">
-      <label>Nome:
-        <input type="text" id="nome" name="nome" required />
-      </label>
-
-      <label>Escola:
-        <input type="text" id="escola" name="escola" required />
-      </label>
-
+      <label>Nome: <input type="text" id="nome" required/></label>
+      <label>Escola: <input type="text" id="escola" required/></label>
       <label>Casa:
-        <select id="casa" name="casa" required>
+        <select id="casa" required>
           <option value="guardia">Casa Guardiã</option>
           <option value="visionaria">Casa Visionária</option>
           <option value="solidaria">Casa Solidária</option>
           <option value="precursora">Casa Precursora</option>
         </select>
       </label>
-
       <button type="submit">Registrar</button>
     </form>
-
-    <p id="regFeedback" class="card" style="display:none;"></p>
   </main>
 
- 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById('formReg');
-      const feedback = document.getElementById('regFeedback');
-
-      if (!form) {
-        console.error('Formulário #formReg não encontrado.');
-        return;
-      }
-
       form.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        const nome = document.getElementById('nome')?.value?.trim();
-        const escola = document.getElementById('escola')?.value?.trim();
-        const casa = document.getElementById('casa')?.value;
-
-        if (!nome || !escola || !casa) {
-          feedback.textContent = 'Preencha todos os campos.';
-          feedback.style.display = 'block';
-          return;
-        }
-
         const aluno = {
-          nome,
-          escola,
-          casa,
+          nome: document.getElementById('nome').value,
+          escola: document.getElementById('escola').value,
+          casa: document.getElementById('casa').value,
           pm: 0,
           pc: 0,
           badges: []
         };
-
-        try {
-          localStorage.setItem('LE_state', JSON.stringify({ aluno }));
-        } catch (err) {
-          feedback.textContent = 'Falha ao salvar os dados. Verifique permissões do navegador.';
-          feedback.style.display = 'block';
-          return;
-        }
-
+        localStorage.setItem('LE_state', JSON.stringify({ aluno }));
         window.location.href = 'aluno.html';
       });
     });
