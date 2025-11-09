@@ -159,3 +159,32 @@ function setupHashRouting() {
   function applyHash() {
     const hash = location.hash || '#inicio';
     document.querySelectorAll('section.card, section.hero').forEach(sec => sec.classList.add('hidden'));
+    const target = document.querySelector(hash);
+    document.querySelector('.hero')?.classList.remove('hidden');
+    if (target) target.classList.remove('hidden');
+  }
+  window.addEventListener('hashchange', applyHash);
+  applyHash();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setText('year', nowYear());
+  setupRegister();
+  setupLogin();
+  setupAchievementForm();
+  setupFilters();
+  setupLogout();
+  setupHashRouting();
+  setupQuiz();
+
+  const session = getSession();
+  if (session) {
+    const student = findStudentById(session.studentId);
+    if (student) {
+      enterDashboard(student);
+      location.hash = '#dashboard';
+    } else {
+      logout();
+    }
+  }
+});
