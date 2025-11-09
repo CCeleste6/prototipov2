@@ -1,46 +1,36 @@
-function setupRegister() {
-  const form = byId('registerForm');
-  const status = byId('registerStatus');
-
-  if (!form) {
-    console.error("Elemento #registerForm não encontrado no HTML.");
-    return;
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('cadastro-aluno');
+  const mensagem = document.getElementById('mensagem');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    clearErrors(form);
-    status.textContent = '';
+    mensagem.textContent = '';
+    mensagem.style.color = '#c00';
 
-    const data = formToObject(form);
+    const nome = form.nome.value.trim();
+    const email = form.email.value.trim();
+    const idAluno = form.idAluno.value.trim();
+    const senha = form.senha.value;
+    const turma = form.turma.value.trim();
 
-    if (!data.name || data.name.length < 3) {
-      validateField(byId('regName'), 'Informe um nome com pelo menos 3 caracteres.');
+    if (!nome || !email || !idAluno || !senha || !turma) {
+      mensagem.textContent = 'Preencha todos os campos.';
       return;
     }
-    if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      validateField(byId('regEmail'), 'Informe um e-mail válido.');
+    if (!/^[A-Za-z0-9_-]+$/.test(idAluno)) {
+      mensagem.textContent = 'ID inválido. Use letras, números, hífen ou sublinhado.';
       return;
     }
-    if (!data.studentId || !/^[A-Za-z0-9_-]{3,}$/.test(data.studentId)) {
-      validateField(byId('regId'), 'ID inválido. Use letras, números, hífen ou sublinhado (mín. 3).');
-      return;
-    }
-    if (!data.password || data.password.length < 6) {
-      validateField(byId('regPass'), 'A senha deve ter ao menos 6 caracteres.');
-      return;
-    }
-    if (!data.classroom) {
-      validateField(byId('regClass'), 'Informe a turma/ano.');
+    if (senha.length < 6) {
+      mensagem.textContent = 'Senha deve ter pelo menos 6 caracteres.';
       return;
     }
 
-    try {
-      createStudent(data);
-      status.textContent = 'Aluno cadastrado com sucesso!';
-      form.reset();
-    } catch (err) {
-      status.textContent = err.message || 'Erro ao cadastrar.';
-    }
+    const aluno = { nome, email, idAluno, turma };
+    localStorage.setItem(`aluno:${idAluno}`, JSON.stringify(aluno));
+
+    form.reset();
+    mensagem.style.color = '#0a0';
+    mensagem.textContent = 'Aluno cadastrado com sucesso (protótipo).';
   });
-}
+});
