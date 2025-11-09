@@ -1,41 +1,36 @@
-<section id="registrar" class="card" aria-labelledby="registrar-title">
-  <h3 id="registrar-title">Registrar novo aluno</h3>
-  <form id="registerForm" novalidate>
-    <div class="grid-2">
-      <div class="field">
-        <label for="regName">Nome completo</label>
-        <input id="regName" name="name" type="text" required minlength="3" autocomplete="name" />
-        <small class="error" aria-live="polite"></small>
-      </div>
-      <div class="field">
-        <label for="regEmail">E-mail</label>
-        <input id="regEmail" name="email" type="email" required autocomplete="email" />
-        <small class="error" aria-live="polite"></small>
-      </div>
-    </div>
-    <div class="grid-2">
-      <div class="field">
-        <label for="regId">ID do aluno</label>
-        <input id="regId" name="studentId" type="text" required minlength="3" pattern="[A-Za-z0-9_-]{3,}" />
-        <small class="hint">Use letras, números, hífen ou sublinhado. Ex.: A123-PE</small>
-        <small class="error" aria-live="polite"></small>
-      </div>
-      <div class="field">
-        <label for="regPass">Senha</label>
-        <input id="regPass" name="password" type="password" required minlength="6" />
-        <small class="hint">Mínimo de 6 caracteres.</small>
-        <small class="error" aria-live="polite"></small>
-      </div>
-    </div>
-    <div class="field">
-      <label for="regClass">Turma/ano</label>
-      <input id="regClass" name="classroom" type="text" required minlength="1" />
-      <small class="error" aria-live="polite"></small>
-    </div>
-    <button type="submit" class="btn primary">Cadastrar</button>
-    <div id="registerStatus" class="status" role="status" aria-live="polite">
-      <script src="app.js" defer></script>
-      <script src="styles.css" defer></script>
-    </div>
-  </form>
-</section>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Alunos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <h1>Registrar novo aluno</h1>
+    <form id="cadastro-aluno" novalidate>
+      <label for="nome">Nome completo</label>
+      <input id="nome" name="nome" type="text" required />
+
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email" required />
+
+      <label for="idAluno">ID do aluno</label>
+      <input id="idAluno" name="idAluno" type="text" required
+             pattern="[A-Za-z0-9_-]+"
+             title="Use letras, números, hífen ou sublinhado. Ex.: A123-PE" />
+
+      <label for="senha">Senha</label>
+      <input id="senha" name="senha" type="password" required minlength="6" />
+
+      <label for="turma">Turma/ano</label>
+      <input id="turma" name="turma" type="text" required />
+
+      <button type="submit">Cadastrar</button>
+      <p id="mensagem" role="alert"></p>
+    </form>
+  </main>
+</body>
+</html>
