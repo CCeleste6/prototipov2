@@ -56,3 +56,4 @@ function renderQuizHistory(student) {
   const historyEl = byId('quizHistory');
   historyEl.innerHTML = '';
   if (!student.quizHistory || student.quizHistory.length ===
+      }
