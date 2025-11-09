@@ -30,7 +30,7 @@ function setupQuiz() {
       date: new Date().toLocaleString()
     };
 
-
+    // salva no histórico do aluno
     student.quizHistory = student.quizHistory || [];
     student.quizHistory.push(result);
 
@@ -44,7 +44,7 @@ function setupQuiz() {
     renderQuizHistory(student);
   });
 
-
+  // renderiza histórico ao carregar
   const session = getSession();
   if (session) {
     const student = findStudentById(session.studentId);
@@ -55,5 +55,21 @@ function setupQuiz() {
 function renderQuizHistory(student) {
   const historyEl = byId('quizHistory');
   historyEl.innerHTML = '';
-  if (!student.quizHistory || student.quizHistory.length ===
-      }
+
+  if (!student.quizHistory || student.quizHistory.length === 0) {
+    historyEl.innerHTML = '<li class="muted">Nenhuma resposta registrada.</li>';
+    return;
+  }
+
+  student.quizHistory.forEach(r => {
+    const li = document.createElement('li');
+    li.className = 'ach-item';
+    li.innerHTML = `
+      <p><strong>${r.question}</strong></p>
+      <p>Sua resposta: ${r.answer}</p>
+      <p>Correta: ${r.correct}</p>
+      <p>${r.isCorrect ? "✅ Acertou" : "❌ Errou"} em ${r.date}</p>
+    `;
+    historyEl.appendChild(li);
+  });
+}
